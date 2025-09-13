@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Free YouTube Video Downloader - Download YouTube Videos in HD</title>
+    <meta name="description" content="Quickly and easily download your favorite YouTube videos in various formats like MP4, HD, and more. Our free online YouTube downloader is fast, secure, and simple to use.">
+    <meta name="keywords" content="youtube downloader, download youtube videos, youtube to mp4, free youtube downloader, online video downloader, youtube video download, hd video downloader">
+    <meta name="author" content="Your Brand Name">
+    <link rel="canonical" href="https://your-website-url.com/">
+    
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="Free YouTube Video Downloader - Fast & Easy">
+    <meta property="og:description" content="Download any YouTube video in high quality with our simple and free online tool. Paste a link and get your video in seconds.">
+    <meta property="og:image" content="https://placehold.co/1200x630/1c1c1e/ffffff?text=YouTube%0ADownloader">
+    <meta property="og:url" content="https://your-website-url.com/">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free YouTube Video Downloader - Fast & Easy">
+    <meta name="twitter:description" content="The best way to download YouTube videos for free. Supports multiple formats and high-definition quality.">
+    <meta name="twitter:image" content="https://placehold.co/1200x600/1c1c1e/ffffff?text=YouTube%0ADownloader">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://www.youtube.com/s/desktop/014dbbed/img/favicon.ico" type="image/x-icon">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- JSON-LD Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Free YouTube Video Downloader",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Any",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "1250"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A free online tool to download YouTube videos in various formats and qualities.",
+      "url": "https://your-website-url.com/"
+    }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #ff0000, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #ff0000;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-8 md:py-16">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold mb-2">
+                <span class="gradient-text">YouTube</span> Video Downloader
+            </h1>
+            <p class="text-md md:text-lg text-gray-400">
+                The fastest and easiest way to download YouTube videos for free.
+            </p>
+        </header>
+
+        <main>
+            <div class="max-w-3xl mx-auto bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 border border-gray-700">
+                <form id="downloadForm">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input 
+                            type="text" 
+                            id="youtubeUrl"
+                            placeholder="Paste your YouTube video link here..."
+                            class="flex-grow w-full px-5 py-3 text-white bg-gray-800 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300"
+                            required
+                        >
+                        <button 
+                            type="submit"
+                            id="downloadBtn"
+                            class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM6.293 9.707a1 1 0 010-1.414l3-3a1 1 0 011.414 0l3 3a1 1 0 01-1.414 1.414L11 7.414V13a1 1 0 11-2 0V7.414L6.707 9.707a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                            <span>Download</span>
+                        </button>
+                    </div>
+                </form>
+                <div id="message" class="mt-4 text-center"></div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="max-w-3xl mx-auto mt-8 hidden">
+                <div class="bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8 border border-gray-700">
+                    <div id="loader" class="flex justify-center items-center py-8">
+                        <div class="loader"></div>
+                    </div>
+                    <div id="videoDetails" class="hidden">
+                        <div class="flex flex-col md:flex-row gap-6 items-center">
+                            <img id="thumbnail" src="" alt="Video Thumbnail" class="w-full md:w-48 rounded-lg shadow-md">
+                            <div class="flex-grow text-center md:text-left">
+                                <h2 id="videoTitle" class="text-xl font-semibold text-white"></h2>
+                                <p id="videoAuthor" class="text-gray-400 mt-1"></p>
+                            </div>
+                        </div>
+                        <div id="downloadLinks" class="mt-6 space-y-3">
+                            <!-- Download links will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SEO Content Section -->
+            <section class="max-w-4xl mx-auto mt-16 text-gray-300">
+                <div class="space-y-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b-2 border-red-500 pb-2 inline-block">How to Download a YouTube Video?</h2>
+                        <ol class="list-decimal list-inside space-y-2">
+                            <li>Go to YouTube and find the video you want to download.</li>
+                            <li>Copy the video's URL from your browser's address bar.</li>
+                            <li>Paste the URL into the input box on our website.</li>
+                            <li>Click the "Download" button and wait for the available formats to appear.</li>
+                            <li>Choose your desired quality and click the download button next to it.</li>
+                        </ol>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b-2 border-red-500 pb-2 inline-block">Features of Our Downloader</h2>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>Completely Free:</strong> No hidden costs or registration required.</li>
+                            <li><strong>High-Quality Downloads:</strong> Download videos in HD, 1080p, 4K, and more.</li>
+                            <li><strong>Multiple Formats:</strong> Supports MP4, WebM, and audio-only formats.</li>
+                            <li><strong>Fast and Secure:</strong> Our servers are optimized for speed, and your data is safe.</li>
+                            <li><strong>Works on All Devices:</strong> Use our downloader on your PC, Mac, Android, or iOS device.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-2xl font-bold text-white mb-4 border-b-2 border-red-500 pb-2 inline-block">Frequently Asked Questions (FAQ)</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <h3 class="font-semibold text-lg">Is it legal to download YouTube videos?</h3>
+                                <p class="text-gray-400">Downloading videos is generally against YouTube's terms of service. You should only download videos for which you have permission from the copyright holder or for personal, offline use.</p>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-lg">Do I need to install any software?</h3>
+                                <p class="text-gray-400">No, our YouTube downloader is a fully web-based tool. Everything happens online in your browser, so you don't need to install anything.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer class="text-center mt-16 text-gray-500">
+            <p>&copy; 2025 Your Brand Name. All Rights Reserved.</p>
+            <p class="text-sm mt-1">Disclaimer: This tool is for personal use only. Please respect the copyright of the content creators.</p>
+        </footer>
+    </div>
+
+    <script>
+        const downloadForm = document.getElementById('downloadForm');
+        const youtubeUrlInput = document.getElementById('youtubeUrl');
+        const messageDiv = document.getElementById('message');
+        const resultsDiv = document.getElementById('results');
+        const loader = document.getElementById('loader');
+        const videoDetailsDiv = document.getElementById('videoDetails');
+        const thumbnailImg = document.getElementById('thumbnail');
+        const videoTitleH2 = document.getElementById('videoTitle');
+        const videoAuthorP = document.getElementById('videoAuthor');
+        const downloadLinksDiv = document.getElementById('downloadLinks');
+
+        downloadForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = youtubeUrlInput.value.trim();
+
+            if (!isValidYoutubeUrl(url)) {
+                showMessage('Please enter a valid YouTube video URL.', 'error');
+                return;
+            }
+
+            clearResults();
+            resultsDiv.classList.remove('hidden');
+            loader.classList.remove('hidden');
+            videoDetailsDiv.classList.add('hidden');
+            showMessage('', 'clear');
+
+            // --- MOCK API CALL ---
+            // In a real application, you would make a fetch request to your backend API here.
+            // For demonstration, we will simulate a delay and use mock data.
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate network delay
+
+                // This is where you would get real data from your server.
+                const videoId = getYoutubeVideoId(url);
+                if (!videoId) throw new Error("Could not extract video ID.");
+
+                const mockData = generateMockData(videoId);
+                displayResults(mockData);
+
+            } catch (error) {
+                loader.classList.add('hidden');
+                showMessage('Failed to fetch video details. Please try again.', 'error');
+                console.error("API Error:", error);
+            }
+        });
+
+        function isValidYoutubeUrl(url) {
+            const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/;
+            return youtubeRegex.test(url);
+        }
+
+        function getYoutubeVideoId(url) {
+            const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
+
+        function showMessage(msg, type) {
+            messageDiv.textContent = msg;
+            messageDiv.className = 'mt-4 text-center ';
+            if (type === 'error') {
+                messageDiv.classList.add('text-red-500');
+            } else if (type === 'success') {
+                messageDiv.classList.add('text-green-500');
+            }
+        }
+        
+        function clearResults() {
+            resultsDiv.classList.add('hidden');
+            downloadLinksDiv.innerHTML = '';
+            videoTitleH2.textContent = '';
+            videoAuthorP.textContent = '';
+            thumbnailImg.src = '';
+        }
+
+        function displayResults(data) {
+            loader.classList.add('hidden');
+            
+            thumbnailImg.src = data.thumbnail;
+            thumbnailImg.onerror = () => {
+                thumbnailImg.src = 'https://placehold.co/480x360/1c1c1e/ffffff?text=Thumbnail';
+            };
+            videoTitleH2.textContent = data.title;
+            videoAuthorP.textContent = `By ${data.author}`;
+            
+            downloadLinksDiv.innerHTML = ''; // Clear previous links
+            data.formats.forEach(format => {
+                const linkElement = document.createElement('a');
+                linkElement.href = format.url;
+                // In a real app, you would add a 'download' attribute.
+                // For this demo, clicking the link just goes to a placeholder.
+                linkElement.target = '_blank';
+                linkElement.rel = 'noopener noreferrer';
+                linkElement.className = 'flex justify-between items-center p-4 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors duration-200';
+                
+                linkElement.innerHTML = `
+                    <div class="flex items-center gap-4">
+                        <span class="font-bold text-white text-sm w-20">${format.quality}</span>
+                        <span class="px-2 py-1 bg-red-600 text-white text-xs font-semibold rounded">${format.container.toUpperCase()}</span>
+                    </div>
+                    <div class="text-sm text-gray-400 mr-4">
+                        ${format.size}
+                    </div>
+                    <div class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md shadow-sm">
+                        Download
+                    </div>
+                `;
+                downloadLinksDiv.appendChild(linkElement);
+            });
+            
+            videoDetailsDiv.classList.remove('hidden');
+        }
+
+        function generateMockData(videoId) {
+            // This function creates realistic fake data for demonstration.
+            const placeholderUrl = `https://www.youtube.com/watch?v=${videoId}`;
+            return {
+                title: 'This is a Sample Video Title',
+                author: 'Awesome Creator',
+                thumbnail: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+                formats: [
+                    { quality: '1080p', container: 'mp4', size: '125.8 MB', url: placeholderUrl },
+                    { quality: '720p', container: 'mp4', size: '78.2 MB', url: placeholderUrl },
+                    { quality: '480p', container: 'mp4', size: '45.1 MB', url: placeholderUrl },
+                    { quality: '360p', container: 'mp4', size: '22.9 MB', url: placeholderUrl },
+                    { quality: '128kbps', container: 'mp3', size: '4.5 MB', url: placeholderUrl }
+                ]
+            };
+        }
+    </script>
+
+</body>
+</html>
+
